@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Configuración de conexión
-$host = 'ftp-jairoapi.alwaysdata.net'; // En AlwaysData: tu servidor
+$host = 'mysql-jairoapi.alwaysdata.net'; // En AlwaysData: tu servidor
 $db = 'jairoapi_biblioteca';
 $user = 'Jairoapi'; // Cambiar en producción
 $password = 'clase1234'; // Agregar contraseña en producción
