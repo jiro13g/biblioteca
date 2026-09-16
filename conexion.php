@@ -5,10 +5,10 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Configuración de conexión
-$host = 'localhost'; // En AlwaysData: tu servidor
-$db = 'biblioteca';
-$user = 'root'; // Cambiar en producción
-$password = ''; // Agregar contraseña en producción
+$host = 'ftp-jairoapi.alwaysdata.net'; // En AlwaysData: tu servidor
+$db = 'jairoapi_biblioteca';
+$user = 'Jairoapi'; // Cambiar en producción
+$password = 'clase1234'; // Agregar contraseña en producción
 $charset = 'utf8mb4';
 
 try {
