@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca Digital</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- Navegación -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">📚</span>
+        <div>
+          <h1>Biblioteca Digital</h1>
+          <p class="tagline">Leer es soñar con los ojos abiertos</p>
+        </div>
+      </div>
+      <div class="nav-menu">
+        <button class="nav-btn" onclick="irA('inicio')">🏠 Inicio</button>
+        <button class="nav-btn" onclick="irA('usuarios')">👥 Usuarios</button>
+        <button class="nav-btn" onclick="irA('libros')">📚 Libros</button>
+        <button class="nav-btn" onclick="irA('prestamos')">📋 Préstamos</button>
+        <button class="nav-btn" onclick="irA('reportes')">📊 Reportes</button>
+        <button class="nav-btn" onclick="irA('admin')">👤 Administrador</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenedor principal -->
+  <main class="container">
+    <!-- SECCIÓN: Inicio (Dashboard) -->
+    <section id="inicio" class="seccion activa">
+      <div class="hero">
+        <div class="hero-contenido">
+          <h2>Bienvenido al sistema de Biblioteca</h2>
+          <p>Gestiona usuarios, libros y préstamos de manera fácil, rápida y segura.</p>
+        </div>
+      </div>
+
+      <div class="estadisticas">
+        <div class="stat-card">
+          <div class="stat-icon">👤</div>
+          <div class="stat-contenido">
+            <h3>Usuarios registrados</h3>
+            <p id="total-usuarios" class="stat-numero">0</p>
+            <a href="#" onclick="irA('usuarios'); return false;">Ver todos →</a>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📚</div>
+          <div class="stat-contenido">
+            <h3>Libros disponibles</h3>
+            <p id="total-libros" class="stat-numero">0</p>
+            <a href="#" onclick="irA('libros'); return false;">Ver todos →</a>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📋</div>
+          <div class="stat-contenido">
+            <h3>Préstamos activos</h3>
+            <p id="total-prestamos" class="stat-numero">0</p>
+            <a href="#" onclick="irA('prestamos'); return false;">Ver todos →</a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="seccion-titulo">Libros destacados</h3>
+      <div id="libros-destacados" class="libros-grid"></div>
+
+      <h3 class="seccion-titulo">Últimos préstamos</h3>
+      <div class="tabla-container">
+        <table class="tabla" id="tabla-ultimos-prestamos">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Usuario</th>
+              <th>Libro</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Usuarios -->
+    <section id="usuarios" class="seccion">
+      <h2>Gestión de Usuarios</h2>
+      <div class="crud-container">
+        <button class="btn-primario" onclick="abrirFormularioUsuario()">+ Nuevo Usuario</button>
+        <input type="text" id="buscar-usuarios" placeholder="Buscar por nombre o cédula" class="input-busqueda">
+      </div>
+      <div class="tabla-container">
+        <table class="tabla" id="tabla-usuarios">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Cédula</th>
+              <th>Teléfono</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Libros -->
+    <section id="libros" class="seccion">
+      <h2>Gestión de Libros</h2>
+      <div class="crud-container">
+        <button class="btn-primario" onclick="abrirFormularioLibro()">+ Nuevo Libro</button>
+        <input type="text" id="buscar-libros" placeholder="Buscar por título, autor o código" class="input-busqueda">
+      </div>
+      <div id="libros-lista" class="libros-grid"></div>
+    </section>
+
+    <!-- SECCIÓN: Préstamos -->
+    <section id="prestamos" class="seccion">
+      <h2>Gestión de Préstamos</h2>
+      <div class="crud-container">
+        <button class="btn-primario" onclick="abrirFormularioPrestamo()">+ Nuevo Préstamo</button>
+        <select id="filtro-estado" class="input-busqueda" onchange="cargarPrestamos()">
+          <option value="">Todos los estados</option>
+          <option value="Activo">Activos</option>
+          <option value="Devuelto">Devueltos</option>
+        </select>
+      </div>
+      <div class="tabla-container">
+        <table class="tabla" id="tabla-prestamos">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Usuario</th>
+              <th>Libro</th>
+              <th>Fecha Préstamo</th>
+              <th>Fecha Devolución</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: Reportes -->
+    <section id="reportes" class="seccion">
+      <h2>Reportes</h2>
+      <div class="reporte-container">
+        <div class="reporte-card">
+          <h3>Libro más prestado</h3>
+          <p id="libro-mas-prestado">Cargando...</p>
+        </div>
+        <div class="reporte-card">
+          <h3>Usuario con más préstamos</h3>
+          <p id="usuario-mas-prestamos">Cargando...</p>
+        </div>
+        <div class="reporte-card">
+          <h3>Total de transacciones</h3>
+          <p id="total-transacciones">Cargando...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para formularios -->
+  <div id="modal" class="modal" style="display: none;">
+    <div class="modal-contenido">
+      <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
+      <h2 id="modal-titulo">Formulario</h2>
+      <form id="formulario" onsubmit="guardarDatos(event)">
+        <div id="campos-formulario"></div>
+        <div class="modal-acciones">
+          <button type="submit" class="btn-primario">Guardar</button>
+          <button type="button" class="btn-secundario" onclick="cerrarModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de detalles de libro -->
+  <div id="modal-libro" class="modal" style="display: none;">
+    <div class="modal-contenido modal-libro-contenido">
+      <button class="modal-cerrar" onclick="cerrarModalLibro()">✕</button>
+      <div id="detalles-libro"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
